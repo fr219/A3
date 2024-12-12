@@ -51,7 +51,7 @@
                 const data = await response.json();
 
                 // Parse and render table
-                renderTable(data.records);
+                renderTable(data.results); // Updated to match the API's structure
             } catch (error) {
                 console.error("Error fetching data:", error);
                 document.getElementById("loading").textContent = "Failed to load data.";
@@ -59,19 +59,19 @@
         }
 
         // Render table
-        function renderTable(records) {
+        function renderTable(results) {
             const table = document.getElementById("data-table");
             const tbody = table.querySelector("tbody");
             tbody.innerHTML = ""; // Clear table body
 
             // Populate table rows
-            records.forEach(record => {
+            results.forEach(result => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${record.record.colleges || "N/A"}</td>
-                    <td>${record.record.the_programs || "N/A"}</td>
-                    <td>${record.record.nationality || "N/A"}</td>
-                    <td>${record.record.student_count || 0}</td>
+                    <td>${result.colleges || "N/A"}</td>
+                    <td>${result.the_programs || "N/A"}</td>
+                    <td>${result.nationality || "N/A"}</td>
+                    <td>${result.number_of_students || 0}</td>
                 `;
                 tbody.appendChild(row);
             });
